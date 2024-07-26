@@ -52,9 +52,14 @@ barchartGC(~CAPPUN + OWNGUN,data=GSSdata, type="percent")
 
 #### Numerical Descriptive Results
 
-      
+<!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!--> 
 
-<!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
+```{r}
+table1 <- xtabs(~CAPPUN + OWNGUN, data=GSSdata)
+rowPerc(table1)
+colPerc(table1)
+```
+The table shows that 
 
 ### Inferential Results
 
