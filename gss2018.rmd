@@ -35,7 +35,7 @@ $H_0$:CAPPUN is independent of OWNGUN
 CAPPUN is Categorical variable 
 OWNGUN is a Numerical variable, so i use the Cat ~ Cat rmd helper file.  
 
-##Results
+## Results
 
 <!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
 
@@ -50,6 +50,8 @@ barchartGC(~CAPPUN + OWNGUN,data=GSSdata, type="percent")
 
 ```
 
+This table shows that those who have a gun and favor vs those are have a gun and oppose capital punishment is about half.
+While the other column shows that those who do not own a gun who oppose capital punishment vs those who do not own a gun but favor capital punishment is about double percent difference.
 #### Numerical Descriptive Results
 
 <!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!--> 
@@ -59,19 +61,42 @@ table1 <- xtabs(~CAPPUN + OWNGUN, data=GSSdata)
 rowPerc(table1)
 colPerc(table1)
 ```
-The table shows that 
+
+The table shows that in the first column those who own a gun and favor capital punishment is 48.28 percent while 51.72 percent who own a gun are opposed to capital punishment.
+The second part of the table shows that 75.68 percent of those who don't own a gun favor capital punishment, while 57.69 who dont own a gun opposed capital punishment. 
 
 ### Inferential Results
 
-<!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
+<!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!--> 
+
+```{r}
+chisq.test(table1)
+chisqtestGC(table1)
+fisher.test(table1)
+```
+
+The P-value for the chi-squared test was 0.02022.
+This means we reject the null hypothesis and conclude that opinion on capital punishment (CAPPUN) is not independent of gun ownership (OWNGUN). 
+The p-value for the fisher test was p-value=0.01651 and the odds ratio was 2.271 
+So the odds ratio 2.27:1 means that people who do not own a gun are 2.271 times more likely to opposed capital punishment.
 
 #  Question 2
 
 <!--In this section you explain what you are trying to show.  Where did the data come from?  What is the research or other question you are trying to answer?!-->
 
 Is there a difference in years of education (EDUC) between the those who did or did not vote in 2012 (VOTE12)?
-       
+
+### Introduction 
+We got this file from GSS.data file.
+$H_0$:there a difference in years of education (EDUC) between the those who did or did not vote in 2012 (VOTE12)?
+$H_A$: There is no difference of years EDUC who did VOTE12.       
+
 ## Methods
+
+EDUC is a Numerical variable 
+VOTE12 is a Factor variable, so i use the NUM~ CAT helper file.  
+
+
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
 
@@ -85,13 +110,38 @@ Is there a difference in years of education (EDUC) between the those who did or 
 
 <!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
 
+```{r}
+plot(EDUC~VOTE12,data=GSSdata)
+```
+
+This boxchart shows that the people who voted in 2012 have a higher education than those that didnt vote in 2012.
+
+
 #### Numerical Descriptive Results
 
-<!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
+<!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!--> 
+
+```{r}
+favstats(EDUC~VOTE12,data=GSSdata)
+```
+
+The Numerical results show that in 2012 those who did vote have almost 16 years in education,
+Those who did not vote 2012 have a little over 13 years of education.
 
 ### Inferential Results
 
-<!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
+<!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->  
+
+```{r}
+t.test(EDUC~VOTE12,data=GSSdata)
+```
+
+This T test shows that those who voted in 2012 that were educated was 15.72656 and those who voted that werent educated was 13.42000 in 2012. The p-value is 0.000000248 which is smaller than 0.5 so we must reject the null hypothesis.
+
+
+
+
+
 
 #  Question 3
 
@@ -99,11 +149,17 @@ Is there a difference in years of education (EDUC) between the those who did or 
 
 Determine if a persons performance on the wordsum test (WORDSUM) is independent of their level of schooling (DEGREE).
 
+$H_0$ The performance of a personss test is independent of their level of schooling. 
+$H_A$ They are dependent.
+
 ## Methods
 
 <!--Decide on your methods:  use "variable analysis" or other appropriate descriptors.  Make sure to choose at least one graphical method and at least one numerical method.!-->
 
-##Results
+Wordsum is a numerical variable 
+Degree is a catagorical variable, so i use the num~cat helper file
+
+## Results
 
 <!--Divide this section into two sub-sections:  One for your descriptive  results and one for your inferential results.!-->
 
@@ -111,18 +167,133 @@ Determine if a persons performance on the wordsum test (WORDSUM) is independent 
 
 #### Graphical Descriptive Results
 
-<!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!-->
+<!--Graphical results here.  Make sure to show your code.  Provide appropriate labels for axes, giving units if possible, and provide a good title for the graph, too.  Use the graphical results to describe the patterns if any that exist in the data as focused toward the research question!--> 
+
+```{r}
+boxplot(WORDSUM~DEGREE,data=GSSdata)
+```
+
+This chart shows LT high school, bachelors and degree,are pretty much the same.
+
 
 #### Numerical Descriptive Results
 
-<!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->
+<!--Numerical results go here. Use the numerical results to describe the patterns if any that exist in the data as focused toward the research question!-->  
+
+```{r}
+favstats(WORDSUM~DEGREE,data=GSSdata)
+```
+
+This shows that their isnt really a significant difference in who uses wordsum based off education.
+
 
 ### Inferential Results
 
-<!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->
+<!--State hypothesis clearly.  Make sure your discussion of the inferential test covers all the aspects that the test output produces, such as test statistic, p-value etc.  Make a decision about the null hypothesis, explain the assumptions on which the selected test/procedure was based, and why the chosen procedure satisfys the assumptions and is appropriate to answer the research question!-->  
+
+```{r}
+anova=aov(WORDSUM~DEGREE,data=GSSdata) 
+summary(anova)
+```
+
+This shows that we reject the null hypothesis because p-value=0.0000002 which is smaller than 0.5 .
+
+```{r}
+plot(TukeyHSD(anova))
+```
+
+There is no difference high school and 
+There is a difference between Jr college and high school
+There is no difference between bachelors and high school
+There is no difference between graduates and highschools
+There is no difference between bachelors and graduates.
 
 
 # Discussion and Conclusion
 
 <!--Discussion and conclusion here.  If you found a relationship be sure to consider whether the relationship occurs because one of the variavbles causes the other, or whether they perhasps are related for some other reason.  Watch the chapter 6 videos from the GeorgeTown videos collection.!-->
+
+First question - Is opinion on the death penalty (CAPPUN) independent of gun ownership (OWNGUN)?
+
+$H_0$:CAPPUN is independent of OWNGUN  
+The P-value for the chi-squared test was 0.02022.
+This means we reject the null hypothesis and conclude that opinion on capital punishment (CAPPUN) is not independent of gun ownership (OWNGUN). 
+The p-value for the fisher test was p-value=0.01651 and the odds ratio was 2.271 
+So the odds ratio 2.27:1 means that people who do not own a gun are 2.271 times more likely to opposed capital punishment.
+Is there a difference in years of education (EDUC) between the those who did or did not vote in 2012 (VOTE12)?
+We got this file from GSS.data file.
+$H_0$:there a difference in years of education (EDUC) between the those who did or did not vote in 2012 (VOTE12)?
+$H_A$: There is no difference of years EDUC who did VOTE12.
+This T test shows that those who voted in 2012 that were educated was 15.72656 and those who voted that werent educated was 13.42000 in 2012. The p-value is 0.000000248 which is smaller than 0.5 so we must reject the null hypothesis.Determine if a persons performance on the wordsum test (WORDSUM) is independent of their level of schooling (DEGREE).
+$H_0$ The performance of a personss test is independent of their level of schooling. 
+$H_A$ They are dependent.
+ T test shows that those who voted in 2012 that were educated was 15.72656 and those who voted that werent educated was 13.42000 in 2012. The p-value is 0.000000248 which is smaller than 0.5 so we must reject the null hypothesis.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
