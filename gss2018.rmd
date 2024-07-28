@@ -227,7 +227,7 @@ $H_A$: There is no difference of years EDUC who did VOTE12.
 This T test shows that those who voted in 2012 that were educated was 15.72656 and those who voted that werent educated was 13.42000 in 2012. The p-value is 0.000000248 which is smaller than 0.5 so we must reject the null hypothesis.Determine if a persons performance on the wordsum test (WORDSUM) is independent of their level of schooling (DEGREE).
 $H_0$ The performance of a personss test is independent of their level of schooling. 
 $H_A$ They are dependent.
- T test shows that those who voted in 2012 that were educated was 15.72656 and those who voted that werent educated was 13.42000 in 2012. The p-value is 0.000000248 which is smaller than 0.5 so we must reject the null hypothesis.
+ T test shows that those who voted in 2012 that were educated was 15.72656 and those who voted that werent educated was 13.42000 in 2012. The p-value is 0.000000248 which is smaller than 0.5 so we must reject the null hypothesis.   
 
 
 
